@@ -1,6 +1,7 @@
 package pizzeria;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class pedidos {
@@ -37,19 +38,39 @@ public class pedidos {
 
 	}
 
-	public void leer(Scanner teclado) {
+	public void leer(Scanner teclado, ArrayList<pedidos> base_pedidos, pedidos meter_pedido, boolean cambios) {
 
+		teclado.nextLine();
 		System.out.println("dime la id del pizza ");
 		this.id_pizza = teclado.nextInt();
 
+		teclado.nextLine();
 		System.out.println("dime la id del cliente ");
 		this.id_cliente = teclado.nextInt();
 
+		teclado.nextLine();
 		System.out.println("dime la id del pedido ");
 		this.id_pedido = teclado.nextInt();
 
+		teclado.nextLine();
 		System.out.println("dime la cantidad ");
 		this.cantidad = teclado.nextInt();
+
+		if (!base_pedidos.contains(meter_pedido)) {
+
+			base_pedidos.add(meter_pedido);
+
+			cambios = true;
+			System.out.println("pedido introducido correctamente");
+
+		}
+
+		else {
+
+			cambios = false;
+			System.out.println("el id de el pedido ya esta puesta");
+
+		}
 	}
 
 	public void visualizar(ArrayList<pedidos> lista) {
@@ -59,6 +80,29 @@ public class pedidos {
 			System.out.println(arti);
 		}
 
+	}
+
+	@Override
+	public String toString() {
+		return "pedidos [id_pizza=" + id_pizza + ", id_cliente=" + id_cliente + ", id_pedido=" + id_pedido
+				+ ", cantidad=" + cantidad + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id_pedido, id_pizza);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		pedidos other = (pedidos) obj;
+		return id_pedido == other.id_pedido && id_pizza == other.id_pizza;
 	}
 
 	public int getId_pizza() {
