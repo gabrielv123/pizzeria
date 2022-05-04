@@ -25,7 +25,9 @@ public class main {
 		pedidos pedidos = new pedidos();
 		pizza pizzas = new pizza();
 		
-		boolean cambios = false;
+		boolean cambios_clientes = false;
+		boolean cambios_pizza = false;
+		boolean cambios_pedidos = false;
 
 		int opcion = 0;
 
@@ -68,27 +70,27 @@ public class main {
 			case 4:
 
 				pizza meter_pizzas = new pizza();
-				meter_pizzas.leer(teclado, meter_pizzas, base_pizza, cambios);
+				cambios_pizza = meter_pizzas.leer(teclado, meter_pizzas, base_pizza, cambios_pizza);
 
 				break;
 
 			case 5:
 
 				cliente meter_cliente = new cliente();
-				meter_cliente.leer(teclado, base_clientes, meter_cliente, cambios);
+				cambios_clientes = meter_cliente.leer(teclado, base_clientes, meter_cliente, cambios_clientes);
 
 				break;
 
 			case 6:
 
 				pedidos meter_pedido = new pedidos();
-				meter_pedido.leer(teclado, base_pedidos, meter_pedido, cambios);
+				cambios_pedidos = meter_pedido.leer(teclado, base_pedidos, meter_pedido, cambios_pedidos);
 		
 				break;
 
 			case 0:
 
-				if (cambios) {
+				if (cambios_pedidos || cambios_clientes || cambios_pizza) {
 
 					insertar(base_clientes, base_pedidos, base_pizza);
 

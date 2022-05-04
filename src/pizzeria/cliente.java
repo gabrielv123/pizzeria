@@ -36,7 +36,7 @@ public class cliente {
 
 	}
 
-	public void leer(Scanner teclado, ArrayList<cliente> base_clientes, cliente meter_cliente, boolean cambios) {
+	public boolean leer(Scanner teclado, ArrayList<cliente> base_clientes, cliente meter_cliente, boolean cambios) {
 
 		System.out.println("dime el dni ");
 		this.id = teclado.nextInt();
@@ -63,6 +63,8 @@ public class cliente {
 			System.out.println("el id de el cliente ya esta puesta");
 
 		}
+		
+		return cambios;
 
 	}
 

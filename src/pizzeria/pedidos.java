@@ -38,7 +38,7 @@ public class pedidos {
 
 	}
 
-	public void leer(Scanner teclado, ArrayList<pedidos> base_pedidos, pedidos meter_pedido, boolean cambios) {
+	public boolean leer(Scanner teclado, ArrayList<pedidos> base_pedidos, pedidos meter_pedido, boolean cambios) {
 
 		teclado.nextLine();
 		System.out.println("dime la id del pizza ");
@@ -71,6 +71,8 @@ public class pedidos {
 			System.out.println("el id de el pedido ya esta puesta");
 
 		}
+		
+		return cambios;
 	}
 
 	public void visualizar(ArrayList<pedidos> lista) {

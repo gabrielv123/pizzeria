@@ -37,7 +37,7 @@ public class pizza {
 		this.precio = precio;
 	}
 
-	public void leer(Scanner teclado, pizza meter_pizzas, ArrayList<pizza> base_pizza, boolean cambios) {
+	public boolean leer(Scanner teclado, pizza meter_pizzas, ArrayList<pizza> base_pizza, boolean cambios) {
 
 		System.out.println("dime la id de la pizza ");
 		this.id = teclado.nextInt();
@@ -68,6 +68,8 @@ public class pizza {
 			System.out.println("el id de la pizza ya esta puesta");
 
 		}
+		
+		return cambios;
 
 	}
 
