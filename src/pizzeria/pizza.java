@@ -55,6 +55,12 @@ public class pizza {
 		if (!base_pizza.contains(meter_pizzas)) {
 
 			base_pizza.add(meter_pizzas);
+			
+			if (base_pizza.size() > 0) {
+				
+				meter_pizzas.setId(base_pizza.get(base_pizza.size() -1).getId() +1);
+				
+			}
 
 			cambios = true;
 
@@ -64,7 +70,6 @@ public class pizza {
 
 		else {
 
-			cambios = false;
 			System.out.println("el id de la pizza ya esta puesta");
 
 		}

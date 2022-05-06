@@ -92,7 +92,7 @@ public class main {
 
 				if (cambios_pedidos || cambios_clientes || cambios_pizza) {
 
-					insertar(base_clientes, base_pedidos, base_pizza);
+					insertar(base_clientes, base_pedidos, base_pizza, cambios_pizza, cambios_pedidos, cambios_clientes);
 
 				}
 				
@@ -181,48 +181,58 @@ public class main {
 
 	}
 
-	public static void insertar(ArrayList<cliente> base_clientes, ArrayList<pedidos> base_pedidos,ArrayList<pizza> base_pizza) throws SQLException {
+	public static void insertar(ArrayList<cliente> base_clientes, ArrayList<pedidos> base_pedidos,ArrayList<pizza> base_pizza ,boolean pizza , boolean pedido , boolean cliente) throws SQLException {
 
 		Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/pizzeria", "root", "");
 
 		System.out.println("Conexión Correcta.");
+		
+		if (cliente) {
+			
+			Statement clientes = conexion.createStatement();
+			clientes.executeUpdate("DELETE FROM erabiltzaileak");
+			
+			for (int i = 0; i < base_clientes.size(); i++) {
+	
+				cliente insertar_clientes = new cliente();
+	
+				insertar_clientes = base_clientes.get(i);
+	
+				clientes.executeUpdate("INSERT INTO erabiltzaileak VALUES ('" + insertar_clientes.getId() + "','"+ insertar_clientes.getNombre() + "','" + insertar_clientes.getApellido() + "');");
 
-		Statement pizzas = conexion.createStatement();
-		Statement clientes = conexion.createStatement();
-		Statement pedidos = conexion.createStatement();
-
-		pizzas.executeUpdate("DELETE FROM pizzak");
-		clientes.executeUpdate("DELETE FROM erabiltzaileak");
-		pedidos.executeUpdate("DELETE FROM eskaerak");
-
-		for (int i = 0; i < base_clientes.size(); i++) {
-
-			cliente insertar_clientes = new cliente();
-
-			insertar_clientes = base_clientes.get(i);
-
-			clientes.executeUpdate("INSERT INTO erabiltzaileak VALUES ('" + insertar_clientes.getId() + "','"+ insertar_clientes.getNombre() + "','" + insertar_clientes.getApellido() + "');");
-
+			}
 		}
-
-		for (int i = 0; i < base_pizza.size(); i++) {
-
-			pizza insertar_pizza = new pizza();
-
-			insertar_pizza = base_pizza.get(i);
-
-			pizzas.executeUpdate("INSERT INTO pizzak VALUES ('" + insertar_pizza.getId() + "','" + insertar_pizza.getNombre() + "','"+ insertar_pizza.getIngredientes() + "','" + insertar_pizza.getPrecio() + "');");
-
+		
+		if (pizza) {
+			
+			Statement pizzas = conexion.createStatement();
+			pizzas.executeUpdate("DELETE FROM pizzak");
+	
+			for (int i = 0; i < base_pizza.size(); i++) {
+	
+				pizza insertar_pizza = new pizza();
+	
+				insertar_pizza = base_pizza.get(i);
+	
+				pizzas.executeUpdate("INSERT INTO pizzak VALUES ('" + insertar_pizza.getId() + "','" + insertar_pizza.getNombre() + "','"+ insertar_pizza.getIngredientes() + "','" + insertar_pizza.getPrecio() + "');");
+				
+			}
 		}
-
-		for (int i = 0; i < base_pedidos.size(); i++) {
-
-			pedidos insertar_pedidos = new pedidos();
-
-			insertar_pedidos = base_pedidos.get(i);
-
-			pedidos.executeUpdate("INSERT INTO eskaerak VALUES ('" + insertar_pedidos.getId_pizza() + "','"+ insertar_pedidos.getId_cliente() + "','" + insertar_pedidos.getId_pedido() + "','"+ insertar_pedidos.getCantidad() + "');");
-
+		
+		
+		if (pedido) {	
+		
+			Statement pedidos = conexion.createStatement();
+			pedidos.executeUpdate("DELETE FROM eskaerak");
+			
+			for (int i = 0; i < base_pedidos.size(); i++) {
+	
+				pedidos insertar_pedidos = new pedidos();
+	
+				insertar_pedidos = base_pedidos.get(i);
+	
+				pedidos.executeUpdate("INSERT INTO eskaerak VALUES ('" + insertar_pedidos.getId_pizza() + "','"+ insertar_pedidos.getId_cliente() + "','" + insertar_pedidos.getId_pedido() + "','"+ insertar_pedidos.getCantidad() + "');");
+			}
 		}
 
 		conexion.close();

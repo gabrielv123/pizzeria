@@ -38,9 +38,6 @@ public class cliente {
 
 	public boolean leer(Scanner teclado, ArrayList<cliente> base_clientes, cliente meter_cliente, boolean cambios) {
 
-		System.out.println("dime el dni ");
-		this.id = teclado.nextInt();
-
 		teclado.nextLine();
 		System.out.println("dime el nombre ");
 		this.nombre = teclado.nextLine();
@@ -51,7 +48,13 @@ public class cliente {
 		if (!base_clientes.contains(meter_cliente)) {
 
 			base_clientes.add(meter_cliente);
-
+			
+			if (base_clientes.size() > 0) {
+				
+				meter_cliente.setId(base_clientes.get(base_clientes.size() -1).getId() +1);
+				
+			}
+			
 			cambios = true;
 			System.out.println("cliente introducida correctamente");
 
@@ -59,7 +62,6 @@ public class cliente {
 
 		else {
 
-			cambios = false;
 			System.out.println("el id de el cliente ya esta puesta");
 
 		}

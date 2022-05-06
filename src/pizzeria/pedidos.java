@@ -49,15 +49,18 @@ public class pedidos {
 		this.id_cliente = teclado.nextInt();
 
 		teclado.nextLine();
-		System.out.println("dime la id del pedido ");
-		this.id_pedido = teclado.nextInt();
-
-		teclado.nextLine();
 		System.out.println("dime la cantidad ");
 		this.cantidad = teclado.nextInt();
 
 		if (!base_pedidos.contains(meter_pedido)) {
 
+			
+			if (base_pedidos.size() > 0) {
+				
+				meter_pedido.setId_pedido(base_pedidos.get(base_pedidos.size() -1).getId_pedido() +1);
+				
+			}
+			
 			base_pedidos.add(meter_pedido);
 
 			cambios = true;
@@ -67,7 +70,6 @@ public class pedidos {
 
 		else {
 
-			cambios = false;
 			System.out.println("el id de el pedido ya esta puesta");
 
 		}
